@@ -35,3 +35,7 @@
 @media(max-width:760px){.experience-layout{grid-template-columns:1fr;gap:28px}.experience-image-wrap,.experience-image-wrap img{min-height:350px;height:350px}.experience-panel{padding:28px 0 12px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:240px 190px 190px}.gallery-item-tall{grid-row:span 1;grid-column:1/-1}.gallery-item-offset{transform:none}.gallery-item-wide{grid-column:span 2}.lightbox{grid-template-columns:36px minmax(0,1fr) 36px;gap:5px;padding:18px 10px}.lightbox-nav{width:34px;height:34px}.lightbox figcaption{font-size:14px}.primary-nav a[aria-current="location"]:after{display:none}}
 @media(max-width:430px){.experience-tabs{gap:8px}.experience-tab{font-size:9px}.experience-tab span{font-size:10px}.gallery-grid{grid-template-rows:220px 170px 170px;gap:9px}.gallery-label{left:10px;bottom:10px;font-size:13px}.lightbox{grid-template-columns:30px minmax(0,1fr) 30px}.lightbox-nav{width:28px;height:28px;font-size:15px!important}}
 @media(prefers-reduced-motion:reduce){.hero-image{animation:none;transform:scale(1.035)}.experience-image-wrap img,.gallery-item img{transition:none}}
+
+.menu-card.menu-enter{animation:menuCardIn .48s cubic-bezier(.2,.7,.2,1) both}
+@keyframes menuCardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.menu-card.menu-enter{animation:none}}
