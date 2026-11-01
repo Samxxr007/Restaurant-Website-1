@@ -46,3 +46,13 @@ The restaurant name, menu, prices, address, hours, and email are fictional place
 - No card data or passwords are collected.
 
 This starter is a technical demonstration, not a security audit or legal/compliance certification.
+
+
+## Latest UI improvements
+
+- Hero background now has a slow, restrained zoom; text entrances are staggered.
+- Sticky navigation has an active-section indicator and improved mobile menu focus behavior.
+- The experience section is interactive, with keyboard-operable tabs and changing story imagery.
+- The gallery uses an asymmetric staggered layout and an accessible lightbox with previous/next controls, keyboard navigation, and focus restoration.
+- Menu filters retain visible/pressed state and animate newly shown cards.
+- Reservation validation now checks consent, guest limits, date round-tripping, and allowed demo time slots on the server.
