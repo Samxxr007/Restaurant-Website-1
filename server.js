@@ -64,10 +64,12 @@ function validate(data) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(item.email)) errors.email = 'Enter a valid email.';
   if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date)) errors.date = 'Choose a valid date.';
   else {
-    const date = new Date(item.date + 'T00:00:00');
+    const [year, month, day] = item.date.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
     const today = new Date(); today.setHours(0,0,0,0);
     const max = new Date(today); max.setDate(max.getDate()+180);
-    if (Number.isNaN(date.getTime()) || date.toISOString().slice(0,10) !== item.date || date < today || date > max) errors.date = 'Choose a valid date within 180 days.';
+    const isRealDate = date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+    if (!isRealDate || date < today || date > max) errors.date = 'Choose a valid date within 180 days.';
   }
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(item.time)) errors.time = 'Choose a valid time.';
   if (!Number.isInteger(item.guests) || item.guests < 1 || item.guests > 8) errors.guests = 'Choose 1–8 guests.';
