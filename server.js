@@ -67,10 +67,12 @@ function validate(data) {
     const date = new Date(item.date + 'T00:00:00');
     const today = new Date(); today.setHours(0,0,0,0);
     const max = new Date(today); max.setDate(max.getDate()+180);
-    if (Number.isNaN(date.getTime()) || date < today || date > max) errors.date = 'Choose a date within 180 days.';
+    if (Number.isNaN(date.getTime()) || date.toISOString().slice(0,10) !== item.date || date < today || date > max) errors.date = 'Choose a valid date within 180 days.';
   }
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(item.time)) errors.time = 'Choose a valid time.';
-  if (!Number.isInteger(item.guests) || item.guests < 1 || item.guests > 12) errors.guests = 'Choose 1–12 guests.';
+  if (!Number.isInteger(item.guests) || item.guests < 1 || item.guests > 8) errors.guests = 'Choose 1–8 guests.';
+  if (!['12:00','13:00','18:00','19:00','20:00','21:00'].includes(item.time)) errors.time = 'Choose an available time.';
+  if (data.demoConsent !== 'accepted') errors.consent = 'Please confirm the demo notice.';
   return { item, errors };
 }
 function allowedOrigin(req) {
@@ -107,7 +109,7 @@ const server = http.createServer(async (req,res) => {
   const url = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
   if (req.method === 'GET' && url.pathname === '/health') return json(res,200,{ok:true});
   if (req.method === 'POST' && url.pathname === '/api/reservations') return reservation(req,res);
-  if (!['GET','HEAD'].includes(req.method)) return json(res,405,{ok:false,message:'Method not allowed.'});
+  if (req.method !== 'GET') return json(res,405,{ok:false,message:'Method not allowed.'});
   return staticFile(req,res,url.pathname);
 });
 server.listen(PORT,'0.0.0.0',() => process.stdout.write('The Ember Table demo running on port '+PORT+'\n'));
