@@ -1,0 +1,8 @@
+{
+  "name": "ember-table-restaurant-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium responsive restaurant website demo with secure reservation validation.",
+  "scripts": { "start": "node server.js", "dev": "node server.js" },
+  "engines": { "node": ">=20" }
+}
